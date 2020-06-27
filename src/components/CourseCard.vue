@@ -2,9 +2,11 @@
   
       <div>
   <b-container>
-      <b-card-group deck v-for="course in courses" :key= "course.id">
+      <b-row>
+          <b-col sm="6" md="4" lg="12">
+              <b-card-group columns deck v-for="course in courses" :key= "course.id">
                 <b-card
-                    title="Card Title"
+                    :title="course.data.name"
                     :img-src="course.data.img"
                     img-alt="Image"
                     img-top
@@ -13,12 +15,17 @@
                     class="mb-2"
                 >
                     <b-card-text>
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                    {{course.data.description}}
                     </b-card-text>
 
-                    <b-button href="#" variant="primary">Go somewhere</b-button>
+                    <b-button href="#" variant="primary">Description</b-button>
                 </b-card>
     </b-card-group>
+
+
+          </b-col>
+      </b-row>
+      
 </b-container>
   </div>
 </template>
@@ -37,8 +44,10 @@ export default {
         // console.log(this.courses)
         // return this.courses
         // }
-        }
-  
+        },
+  created() {
+    this.$store.dispatch('getCourses')
+  },
  }
 
 
